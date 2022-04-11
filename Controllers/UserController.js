@@ -154,7 +154,7 @@ class UserController{
        
     try { 
      const idToken=req.body.idToken;
-     const accessToken=req.body.accessToken;     
+     const accessToken=req.body.accessToken;   
      if(!idToken){
          return res.status(400).json({status:false,data:'idToken Not Provided'});
        }
@@ -180,6 +180,7 @@ class UserController{
                 
             }
             let authToken=await jwt.sign(user,process.env.JWT_USER_LOGIN_SECRET_KEY);
+            
             return res.status(200).cookie("auth-token",authToken).set("Auth-token",authToken).json({status:true,data:authToken})
             
         }else{
