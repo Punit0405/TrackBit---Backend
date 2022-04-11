@@ -9,7 +9,10 @@ router.route("/userregister").post(UserController.userRegister);
 router.route("/verifyuser/:token").get(UserController.verifyUser);
 
 //Route 3:User Login Through Email And Password
-router.route("/userlogin").post(UserController.userLogin)
+router.route("/userlogin").post(UserController.userLogin);
+
+//Route 4:User Login With google
+router.route("/usergooglelogin").post(UserController.userGoogleLogin)
 
 
 

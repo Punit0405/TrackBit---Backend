@@ -1,7 +1,9 @@
 const User=require('../Models/User.js');
 const bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
-const mailer=require('./Mailer')
+const mailer=require('./Mailer');
+const client=require('./GoogleAuthClient');
+
 class UserController{
  
 
@@ -146,6 +148,68 @@ class UserController{
            return res.status(501).json({status:false,data:"Some Internal Error Occured"})
        }
 
+   }
+
+   static userGoogleLogin= async(req,res)=>{
+       
+    try { 
+     const idToken=req.body.idToken;
+     const accessToken=req.body.accessToken;     
+     if(!idToken){
+         return res.status(400).json({status:false,data:'idToken Not Provided'});
+       }
+     if(!accessToken){
+         return res.status(400).json({status:false,data:'accessToken Not Provided'});
+       }
+   
+        
+      let token= await client.verifyIdToken({
+            idToken:idToken,
+            audience:process.env.CLIENT_ID
+ 
+        })
+        let payload= token.getPayload();
+        if(!payload.email_verified){
+            return res.status(401).json({status:false,data:"Email ID not verified by google"})
+        }
+        const databaseCheck= await User.findOne({email:payload.email});    
+        if(databaseCheck){
+            let user={
+                id:databaseCheck._id,
+                email:databaseCheck.email
+                
+            }
+            let authToken=await jwt.sign(user,process.env.JWT_USER_LOGIN_SECRET_KEY);
+            return res.status(200).cookie("auth-token",authToken).set("Auth-token",authToken).json({status:true,data:authToken})
+            
+        }else{
+            
+            const salt= await bcrypt.genSalt(10)
+            const databasePassword = await bcrypt.hash(payload.email+payload.name,salt)
+            let newUser=new User({
+                email:payload.email,
+                name:payload.name,
+                password:databasePassword,
+                photoUrl:payload.picture,
+                accessToken:accessToken,
+                idToken:idToken
+                
+            })
+            let user={
+                id:newUser._id,
+                email:newUser.email
+            }
+            let authToken=await jwt.sign(user,process.env.JWT_USER_LOGIN_SECRET_KEY);
+            await newUser.save()
+            return res.status(200).cookie("auth-token",authToken).set("Auth-token",authToken).json({status:true,data:authToken})
+        }
+        
+
+    } catch (error) {
+        console.log(error.message)
+        return res.status(500).json({status:false,data:"Some Internal Error Occured"})
+    }
+       
    }
 }
 
