@@ -31,6 +31,12 @@ const userSchema = new Schema({
          type:Number,
          default:50
      },
+     idToken:{
+         type:String
+     },
+     accessToken:{
+         type: String
+     },
      photoUrl:{
          type:String
      } 
