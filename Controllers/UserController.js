@@ -135,7 +135,7 @@ class UserController{
                }
                let token= await jwt.sign(loginData,process.env.JWT_USER_LOGIN_SECRET_KEY);
                
-               return res.status(200).set("Auth-token",token).json({status:true,data:token})
+               return res.status(200).cookie("auth-token",token).set("Auth-token",token).json({status:true,data:token})
 
            }else{
                return res.status(400).json({status:false,data:"Invalid Credentials"})
