@@ -23,6 +23,10 @@ const userSchema = new Schema({
          type:Number,
          default:0
      },
+     level:{
+         type:Number,
+         default:1
+     },
      health:{
          type:Number,
          default:50
