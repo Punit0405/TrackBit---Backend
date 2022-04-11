@@ -8,6 +8,18 @@ class UserController{
    static userRegister= async(req,res)=>{
        try {
            const{name,email,password,confirmpassword}=req.body;
+           if(!name){
+               return res.status(400).json({status:false,data:"Name is not provided"})
+           }
+           if(!email){
+               return res.status(400).json({status:false,data:"Email is not provided"})
+           }
+           if(!password){
+               return res.status(400).json({status:false,data:"PassWord is not provided"})
+           }
+           if(!confirmpassword){
+               return res.status(400).json({status:false,data:"Confirm Password is not provided"})
+           }
            if(password!==confirmpassword){
                return res.status(401).json({status:false,data:"Password Doesn't Match"})
            }
@@ -61,9 +73,12 @@ class UserController{
            return res.status(500).json({status:false,data:"Some Internal Error Occured"})
        }
    } 
+
+
    static verifyUser =async(req,res)=>{
        try{
         const token=req.params.token;
+    
         try {
             
             const payload= await jwt.verify(token,process.env.JWT_USER_REGISTER_SECRET_KEY);
@@ -94,6 +109,42 @@ class UserController{
        }
        
 
+
+   }
+
+
+   static userLogin = async(req,res)=>{
+       try {
+           const {userEmail,userPassword}=req.body;
+           if(!userEmail){
+               return res.status(400).json({status:false,data:"Email ID is Not Provided"})
+           }
+           if(!userPassword){
+               return res.status(400).json({status:false,data:"Password ID is Not Provided"})
+           }
+           const user= await User.findOne({email:userEmail});
+           if(!user){
+               return res.status(404).json({status:false,data:"Invalid Credentials"})
+           }
+            
+             
+           if(await bcrypt.compare(userPassword,user.password)){
+               let loginData={
+                   userId:user._id,
+                   userEmail:user.email
+               }
+               let token= await jwt.sign(loginData,process.env.JWT_USER_LOGIN_SECRET_KEY);
+               
+               return res.status(200).set("Auth-token",token).json({status:true,data:token})
+
+           }else{
+               return res.status(400).json({status:false,data:"Invalid Credentials"})
+           }
+           
+           
+       } catch (error) {
+           return res.status(501).json({status:false,data:"Some Internal Error Occured"})
+       }
 
    }
 }
