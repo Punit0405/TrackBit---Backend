@@ -85,7 +85,7 @@ class UserController{
             const user={
                 name:payload.name,
                 email:payload.email,
-                password:payload.password
+                password:payload.password                
             }
             let databaseCheck =  await User.find({email:user.email});
            if(databaseCheck.length!==0){
