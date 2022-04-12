@@ -150,12 +150,10 @@ class UserController{
 
    }
 
-   static userGoogleLogin= async(req,res)=>{
-       
+   static userGoogleLogin= async(req,res)=>{       
     try { 
      const idToken=req.body.idToken;
-     const accessToken=req.body.accessToken;   
-     console.log(accessToken);
+     const accessToken=req.body.accessToken;
      if(!idToken){
          return res.status(400).json({status:false,data:'idToken Not Provided'});
        }
