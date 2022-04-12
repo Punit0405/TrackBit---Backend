@@ -155,6 +155,7 @@ class UserController{
     try { 
      const idToken=req.body.idToken;
      const accessToken=req.body.accessToken;   
+     console.log(accessToken);
      if(!idToken){
          return res.status(400).json({status:false,data:'idToken Not Provided'});
        }
@@ -179,9 +180,11 @@ class UserController{
                 email:databaseCheck.email
                 
             }
+            databaseCheck.accessToken=accessToken;
             let authToken=await jwt.sign(user,process.env.JWT_USER_LOGIN_SECRET_KEY);
             
-            return res.status(200).cookie("auth-token",authToken).set("Auth-token",authToken).json({status:true,data:authToken})
+            res.status(200).cookie("auth-token",authToken).set("Auth-token",authToken).json({status:true,data:authToken})
+            return await databaseCheck.save();
             
         }else{
             
@@ -214,4 +217,4 @@ class UserController{
    }
 }
 
-module.exports=UserController
+module.exports=UserController;
