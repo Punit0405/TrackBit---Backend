@@ -31,6 +31,10 @@ const userSchema = new Schema({
          type:Number,
          default:50
      },
+     healthResetCount:{
+         type:Number,
+         default:0
+     },
      idToken:{
          type:String
      },

@@ -3,7 +3,6 @@ const bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
 const mailer=require('./Mailer');
 const client=require('./GoogleAuthClient');
-const { findById } = require('../Models/User.js');
 const { default: axios } = require('axios');
 
 
@@ -77,8 +76,7 @@ class UserController{
        } catch (error) {
            return res.status(500).json({status:false,data:"Some Internal Error Occured"})
        }
-   } 
-
+   }
 
    static verifyUser =async(req,res)=>{
        try{
@@ -116,7 +114,6 @@ class UserController{
 
 
    }
-
 
    static userLogin = async(req,res)=>{
        try {
@@ -232,6 +229,57 @@ class UserController{
        } catch (error) {
            console.log(error.message)
            return res.status(500).json({status:false,data:"Some Internal Error Occured"})
+       }
+   }
+
+   static increaseExperience = async(req,res)=>{
+       try {
+           const experience =  req.body.experience;
+           if(!experience){
+               return res.status(400).json({status:false,data:"Experience not provided"})
+           }
+           const loggedinUser= await User.findById(req.user.id);
+           loggedinUser.experience=loggedinUser.experience + experience;
+           res.status(200).json({status:true,data:"Experience Updataed"});           
+           while(loggedinUser.experience >=50){
+               loggedinUser.experience=loggedinUser.experience-50;
+               loggedinUser.level++;
+           }
+           return await loggedinUser.save()
+
+
+           
+       } catch (error) {
+           console.log(error.message);
+           return res.status(500).json({status:false,data:"Some Internal Error Occured"})
+           
+       }
+   }
+   
+   static decreaseHealth = async(req,res)=>{
+       try {
+           const health =  req.body.health;
+           if(!health){
+               return res.status(400).json({status:false,data:"Health not provided"})
+           }
+           const loggedinUser= await User.findById(req.user.id);
+           loggedinUser.health=loggedinUser.health -  health;
+           res.status(200).json({status:true,data:"Health Updataed"});
+           while(loggedinUser.health <=0){
+               loggedinUser.health = loggedinUser.health+50;
+               loggedinUser.healthResetCount++;
+               loggedinUser.level--;
+           }
+
+
+           return await loggedinUser.save()
+
+
+           
+       } catch (error) {
+           console.log(error.message);
+           return res.status(500).json({status:false,data:"Some Internal Error Occured"})
+           
        }
    }
 }

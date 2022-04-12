@@ -16,7 +16,14 @@ router.route("/userlogin").post(UserController.userLogin);
 router.route("/usergooglelogin").post(UserController.userGoogleLogin);
 
 //Route for User Logout
-router.route("/usergooglelogout").get(isLoggedin,UserController.userGoogleLogout)
+router.route("/usergooglelogout").get(isLoggedin,UserController.userGoogleLogout);
+
+// Route For Increasing User Experience
+router.route("/increaseUserExperience").post(isLoggedin,UserController.increaseExperience)
+
+//Route For Decreasing User Health
+router.route("/decreaseUserHealth").post(isLoggedin,UserController.decreaseHealth)
+
 
 
 
