@@ -3,6 +3,9 @@ const bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
 const mailer=require('./Mailer');
 const client=require('./GoogleAuthClient');
+const { findById } = require('../Models/User.js');
+const { default: axios } = require('axios');
+
 
 class UserController{
  
@@ -212,6 +215,24 @@ class UserController{
         return res.status(500).json({status:false,data:"Some Internal Error Occured"})
     }
        
+   }
+
+   static userGoogleLogout=async(req,res)=>{
+       try {
+          
+           const dbUser=await User.findById(req.user.id);
+           const URL=`https://accounts.google.com/o/oauth2/revoke?token=${dbUser.accessToken}`;
+        
+           await axios.get(URL)
+          return res.status(200).json({status:true,data:"User Has been LoggedOut"})
+           
+
+          
+           
+       } catch (error) {
+           console.log(error.message)
+           return res.status(500).json({status:false,data:"Some Internal Error Occured"})
+       }
    }
 }
 

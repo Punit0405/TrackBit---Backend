@@ -1,0 +1,80 @@
+{
+  "client": "Thunder Client",
+  "collectionName": "TrackBit",
+  "dateExported": "2022-04-12T05:32:50.387Z",
+  "version": "1.1",
+  "folders": [],
+  "requests": [
+    {
+      "_id": "5728b87c-809c-4387-82a3-63bf3dee485a",
+      "colId": "21c7088b-2cce-4bb9-b4c6-83fa7e3b10ef",
+      "containerId": "",
+      "name": "Trackbit-User register",
+      "url": "localhost:5000/api/v1/userregister",
+      "method": "POST",
+      "sortNum": 10000,
+      "created": "2022-04-09T11:25:05.776Z",
+      "modified": "2022-04-11T04:46:03.906Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n    \"name\":\"Punit Tewani\",\n    \"email\":\"punit.tewani.sa@gmail.com\",\n    \"password\":\"Punit@92655\",\n    \"confirmpassword\":\"Punit@92655\"\n    \n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "_id": "799c5c2b-7182-4fa8-b90b-82f5fd8d2566",
+      "colId": "21c7088b-2cce-4bb9-b4c6-83fa7e3b10ef",
+      "containerId": "",
+      "name": "Email Verificaiton",
+      "url": "http://localhost:5000/api/v1/verifyuser/{{token}}",
+      "method": "GET",
+      "sortNum": 20000,
+      "created": "2022-04-09T13:11:41.398Z",
+      "modified": "2022-04-11T09:10:39.890Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "998f2bb2-52d2-4556-9b60-7a8020dabfb0",
+      "colId": "21c7088b-2cce-4bb9-b4c6-83fa7e3b10ef",
+      "containerId": "",
+      "name": "Login User",
+      "url": "localhost:5000/api/v1/userlogin",
+      "method": "POST",
+      "sortNum": 30000,
+      "created": "2022-04-11T07:16:01.605Z",
+      "modified": "2022-04-11T09:14:16.716Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n    \"userEmail\":\"punit.tewani.sa@gmail.com\",\n    \"userPassword\":\"Punit@92655\"\n    \n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "_id": "561004d4-bb37-479a-842a-ea8eaa3a5e81",
+      "colId": "21c7088b-2cce-4bb9-b4c6-83fa7e3b10ef",
+      "containerId": "",
+      "name": "Log In with Google",
+      "url": "localhost:5000/api/v1/usergooglelogin",
+      "method": "POST",
+      "sortNum": 40000,
+      "created": "2022-04-11T09:57:06.317Z",
+      "modified": "2022-04-11T11:49:27.512Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n    \"idToken\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6ImYxMzM4Y2EyNjgzNTg2M2Y2NzE0MDhmNDE3MzhhN2I0OWU3NDBmYzAiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiNDk0Njk5OTAzNjI2LTI1a202bmZ0djU5amc3aDI0Z3JtcDA3bm8zMjFncXJ1LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiNDk0Njk5OTAzNjI2LTI1a202bmZ0djU5amc3aDI0Z3JtcDA3bm8zMjFncXJ1LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTA2MjA3OTM2Nzg2NjkxMDk4MTE1IiwiZW1haWwiOiJwdW5pdC50ZXdhbmkuc2FAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJnN19KaVFTT2hEWEJRdEtIZHVtOUJ3IiwibmFtZSI6IlB1bml0IFRld2FuaSIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQVRYQUp4bjZUS1h2NmY2OXlTcjJXdmZzUnlicXlPUFRNMzdsS0FOZ2hITj1zOTYtYyIsImdpdmVuX25hbWUiOiJQdW5pdCIsImZhbWlseV9uYW1lIjoiVGV3YW5pIiwibG9jYWxlIjoiZW4iLCJpYXQiOjE2NDk2Nzc2NjEsImV4cCI6MTY0OTY4MTI2MSwianRpIjoiN2ZiNGNhYTc0NmVkNDJjZmE4OTllZDE2ZTM2N2UzM2NlMjg3ZDJmOSJ9.OPO9QomEFiFQxdQvruATYHWvIF5oRwKnjLUEaNBb_LeesVWIC3Z9cTidnBTV4rGDMxLCL0tirpjEdeOb9sgNcN48L3T2-52gOFflbkaLVG91KYwbPMCUEx6w_98nwNGHAYpAiZHmb_mqnYRnQ5EZvxNfY_EXLxyEbnyECsR6xaEfkJJtSXWmCXBc_hJ1tzyazezK_ENkkVGspARQsHBWM2aWHSCN5n3BsNywNs1rgEw5XCh7_x8IC-evWA04fbfofTejtGgrvnFt6ns0fuROfCxDzfbssmRxrjRYnEefKbm4JHlCpmJE_AXczNlLiNWTtvQHKQSNuOWBmaA9tb6JYA\",\n    \"accessToken\": \"ya29.A0ARrdaM-vgmMZ7oA_IIr_HKS0KlBnO25W1fDlMfrVHxRdbHj80FTefTfErSxaGgJO5-Nv0__axOh6cJJwI6uI8-3ztkecCw5X7ZIPr-RQ1G0Li47i9bx-EvVV0FwWB9nLuoePBIcTd6oEIQhEzmKyPFTaS13w\"\n}",
+        "form": []
+      },
+      "tests": []
+    }
+  ]
+}
