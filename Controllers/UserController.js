@@ -255,7 +255,7 @@ class UserController{
            
        }
    }
-   
+
    static decreaseHealth = async(req,res)=>{
        try {
            const health =  req.body.health;
@@ -268,7 +268,11 @@ class UserController{
            while(loggedinUser.health <=0){
                loggedinUser.health = loggedinUser.health+50;
                loggedinUser.healthResetCount++;
-               loggedinUser.level--;
+               loggedinUser.experience -=10;
+               if(loggedinUser.experience <=0){
+                   loggedinUser.experience=0;
+                   loggedinUser.level--;
+               }
            }
 
 
