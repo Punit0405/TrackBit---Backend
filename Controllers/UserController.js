@@ -122,18 +122,18 @@ class UserController{
                return res.status(400).json({status:false,data:"Email ID is Not Provided"})
            }
            if(!userPassword){
-               return res.status(400).json({status:false,data:"Password ID is Not Provided"})
+               return res.status(400).json({status:false,data:"Password ID is Not Provided"});
            }
            const user= await User.findOne({email:userEmail});
            if(!user){
-               return res.status(404).json({status:false,data:"Invalid Credentials"})
+               return res.status(404).json({status:false,data:"Invalid Credentials"});
            }
             
              
            if(await bcrypt.compare(userPassword,user.password)){
                let loginData={
-                   userId:user._id,
-                   userEmail:user.email
+                   id:user._id,
+                   email:user.email
                }
                let token= await jwt.sign(loginData,process.env.JWT_USER_LOGIN_SECRET_KEY);
                
