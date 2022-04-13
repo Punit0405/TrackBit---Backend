@@ -20,7 +20,7 @@ app.use(cors({
   }))
 
 //Routing
-app.use('/api/v1',userRoutes)
+app.use('/api/v1/user',userRoutes)
 
 // Server Listening
 app.listen(process.env.PORT,()=>{
