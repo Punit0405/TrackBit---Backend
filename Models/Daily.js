@@ -17,10 +17,16 @@ const dailySchema = new Schema({
     checkLists:{
         type:[String]
     },
-    dueDate:{
+    startDate:{
         type:Date,
         required:true,
         
+    },
+    days:{
+        type:String,
+        default:'EveryDay'
+
+
     },
     tags:{
        type:[String]

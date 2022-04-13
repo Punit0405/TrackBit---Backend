@@ -7,13 +7,14 @@ class DailyController{
 static addDaily =async(req,res)=>{    
     try {
         
-        const {title,description,checklists,dueDate,tags,reminder} = req.body;
+        const {title,description,checklists,startDate,days,tags,reminder} = req.body;
         const newDaily=new Daily({
             title:title,
             description:description,
             checkLists:checklists,
+            days:days,
             userId:req.user.id,
-            dueDate:dueDate,
+            startDate:startDate,
             tags:tags
             
             
@@ -44,7 +45,7 @@ static fetchDailys =async (req,res)=>{
 static updateDaily = async(req,res)=>{
     try {
            const {id}= req.params;
-           const {title,description,checklists,dueDate,tags,reminder} = req.body;
+           const {title,description,checklists,days,startDate,tags,reminder} = req.body;
            const daily = await Daily.findById(id);
            if(!daily){
                return res.status(404).json({status:false,data:"Daily not found"})
@@ -65,8 +66,11 @@ static updateDaily = async(req,res)=>{
            if(checklists){
                daily.checkLists=checklists
            }
-           if(dueDate){
-               daily.dueDate=dueDate
+           if(startDate){
+               daily.startDate=startDate
+           }
+           if(days){
+               daily.days=days
            }
            if(tags){
                daily.tags=tags
