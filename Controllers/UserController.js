@@ -263,17 +263,22 @@ class UserController{
                return res.status(400).json({status:false,data:"Health not provided"})
            }
            const loggedinUser= await User.findById(req.user.id);
-           loggedinUser.health=loggedinUser.health -  health;
+           loggedinUser.health=loggedinUser.health - health;
            res.status(200).json({status:true,data:"Health Updataed"});
            while(loggedinUser.health <=0){
-               loggedinUser.health = loggedinUser.health+50;
+
+               loggedinUser.health = 50;
                loggedinUser.healthResetCount++;
                loggedinUser.experience -=10;
+            
                if(loggedinUser.experience <=0){
                    loggedinUser.experience=0;
                    loggedinUser.level--;
                }
+               
            }
+
+
 
 
            return await loggedinUser.save()
@@ -281,7 +286,7 @@ class UserController{
 
            
        } catch (error) {
-           console.log(error.message);
+           console.log(error);
            return res.status(500).json({status:false,data:"Some Internal Error Occured"})
            
        }

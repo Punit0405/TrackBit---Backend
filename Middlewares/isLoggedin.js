@@ -2,7 +2,7 @@ const jwt=require('jsonwebtoken');
 const isLoggedin = async (req,res,next)=>{
    
     if(!req.headers.authtoken){
-        console.log(req.header.authtoken)
+        
         return res.status(400).json({status:false,data:"You are Not Loggedin"})
     }
     const authToken=req.headers.authtoken;

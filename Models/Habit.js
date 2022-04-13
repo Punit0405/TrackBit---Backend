@@ -20,7 +20,8 @@ const habitSchema = new Schema({
     },
     duration:{
         type:Number,
-        required:true
+        required:true,
+        default:21
     },
     tags:{
        type:[String]
