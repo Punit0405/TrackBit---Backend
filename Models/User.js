@@ -41,6 +41,10 @@ const userSchema = new Schema({
      accessToken:{
          type: String
      },
+     appliedChallanges:{
+         type:[mongoose.Schema.Types.ObjectId],
+         ref:'challange'
+     },
      photoUrl:{
          type:String
      } 
