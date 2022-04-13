@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const {Schema,model}= require('mongoose');
 
 const userSchema = new Schema({
@@ -30,6 +31,10 @@ const userSchema = new Schema({
      health:{
          type:Number,
          default:50
+     },
+     healthResetCount:{
+         type:Number,
+         default:0
      },
      idToken:{
          type:String
