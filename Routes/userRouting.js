@@ -2,9 +2,10 @@ const express=require('express');
 const router= express.Router();
 const isLoggedin=require('../Middlewares/isLoggedin');
 const UserController=require('../Controllers/UserController');
+const validator= require('../Validations/userValidator');
 
 //Route for User Registration
-router.route("/userregister").post(UserController.userRegister);
+router.route("/userregister").post(validator.validateUser,UserController.userRegister);
 
 //Route for Email Verficaiton
 router.route("/verifyuser/:token").get(UserController.verifyUser);
