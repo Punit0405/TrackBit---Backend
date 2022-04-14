@@ -2,6 +2,7 @@ const Daily=require("../Models/Daily")
 const bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
 
+
 class DailyController{
 
 static addDaily =async(req,res)=>{    
