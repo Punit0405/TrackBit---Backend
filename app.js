@@ -6,6 +6,8 @@ require('./DBconnection/connection');
 const userRoutes=require('./Routes/userRouting');
 const habitRoutes = require('./Routes/habitRouting')
 const todoRoutes= require('./Routes/todoRouting');
+const dailyRoutes = require('./Routes/dailiesRouting');
+
 
 
 //Server Creation
@@ -25,6 +27,7 @@ app.use(cors({
 app.use('/api/v1/user',userRoutes);
 app.use('/api/v1/habit',habitRoutes)
 app.use('/api/v1/todo',todoRoutes);
+app.use('/api/v1/daily',dailyRoutes);
 
 // Server Listening
 app.listen(process.env.PORT,()=>{
