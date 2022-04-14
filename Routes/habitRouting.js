@@ -2,7 +2,7 @@ const express=require('express');
 const router= express.Router();
 const isLoggedin=require('../Middlewares/isLoggedin');
 const HabitController = require("../Controllers/HabitController");
-const validator= require("../Validations/validator")
+const validator= require("../Validations/habitValidator")
 
 //Route for Adding Habbit
 router.route("/addhabit").post(isLoggedin,validator.validateHabit,HabitController.addHabit);
