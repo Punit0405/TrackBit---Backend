@@ -3,7 +3,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 const cors=require('cors')
 require('./DBconnection/connection');
-const userRoutes=require('./Routes/userRouting')
+const userRoutes=require('./Routes/userRouting');
+const dailyRoutes = require('./Routes/dailiesRouting');
 
 
 //Server Creation
@@ -20,7 +21,8 @@ app.use(cors({
   }))
 
 //Routing
-app.use('/api/v1/user',userRoutes)
+app.use('/api/v1/user',userRoutes);
+app.use('/api/v1/daily',dailyRoutes)
 
 // Server Listening
 app.listen(process.env.PORT,()=>{
