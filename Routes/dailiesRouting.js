@@ -2,7 +2,7 @@ const express=require('express');
 const router= express.Router();
 const isLoggedin=require('../Middlewares/isLoggedin');
 const DailyController = require("../Controllers/DailyController");
-const validator = require("../Validations/validator");
+const validator = require("../Validations/dailyValidator");
 
 //Route for Adding Habbit
 router.route("/adddaily").post(isLoggedin,validator.validateDaily,DailyController.addDaily);
